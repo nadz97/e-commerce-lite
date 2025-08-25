@@ -11,4 +11,9 @@ class Discount extends Model
     protected $guarded = [];
 
     protected $primaryKey = 'discount_id';
+
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
+    }
 }

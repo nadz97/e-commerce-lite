@@ -11,4 +11,9 @@ class Shipping extends Model
     protected $guarded = [];
 
     protected $primaryKey = 'shipping_id';
+
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
+    }
 }

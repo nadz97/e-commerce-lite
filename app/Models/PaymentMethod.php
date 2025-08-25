@@ -11,4 +11,9 @@ class PaymentMethod extends Model
     protected $guarded = [];
 
     protected $primaryKey = 'payment_method_id';
+
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
+    }
 }

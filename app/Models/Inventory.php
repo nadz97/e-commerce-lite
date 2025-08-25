@@ -11,4 +11,9 @@ class Inventory extends Model
     protected $guarded = [];
 
     protected $primaryKey = 'inventory_id';
+
+    public function product()
+    {
+        return $this->belongsTo(Product::class);
+    }
 }
