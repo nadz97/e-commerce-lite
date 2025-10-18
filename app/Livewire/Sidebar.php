@@ -23,7 +23,7 @@ class Sidebar extends Component
                 'children' => [
                     ['label' => 'All Products', 'route' => 'admin.products'],
                     ['label' => 'Add New', 'route' => 'admin.product.create'],
-                    ['label' => 'Categories', 'route' => 'admin.product.create-category'],
+                    ['label' => 'Categories', 'route' => 'admin.categories'],
                 ],
             ],
             [

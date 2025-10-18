@@ -28,6 +28,26 @@
             </header>
         @endif
 
+        <div x-data="{
+            show: false,
+            message: '',
+            type: 'info'
+        }"
+            @notify.window=
+            "show = true;
+            message = $event.detail.message;
+            type = $event.detail.type;
+            setTimeout(() => show = false, 3000)"
+            x-show="show" x-transition class="fixed top-4 right-4 p-4 rounded shadow-lg z-50"
+            :class="{
+                'bg-green-500': type === 'success',
+                'bg-red-500': type === 'error',
+                'bg-yellow-500': type === 'warning',
+                'bg-blue-500': type === 'info'
+            }">
+            <p x-text="message" class="text-white"></p>
+        </div>
+
         {{-- flash message --}}
         @if (session('success'))
             <div x-data="{ show: true }" x-show="show" x-transition

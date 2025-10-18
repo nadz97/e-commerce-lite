@@ -24,4 +24,7 @@ Route::get('/admin/product/create', Create::class)
 Route::get('/admin/product/create-category', CreateCategory::class)
     ->name('admin.product.create-category');
 
+Route::get('/admin/products/category', function () {
+    return view('admin.categories');
+})->name('admin.categories');
 require __DIR__ . '/auth.php';
