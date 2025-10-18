@@ -10,7 +10,7 @@ class Shipping extends Model
 
     protected $guarded = [];
 
-    protected $primaryKey = 'shipping_id';
+    protected $primaryKey = 'id';
 
     public function orders()
     {

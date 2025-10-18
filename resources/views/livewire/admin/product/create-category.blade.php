@@ -1,0 +1,64 @@
+<div class="space-y-6">
+
+    <!-- Page Title -->
+    <div class="bg-teal p-6 rounded-2xl shadow-popout border border-white/30">
+        <h1 class="text-2xl font-semibold text-brand">Add New Category</h1>
+        <p class="text-brand/70 text-sm mt-1">Fill in the details below to add a new category.</p>
+    </div>
+
+    <div x-data="{
+        show: false,
+        message: '',
+        type: 'info'
+    }"
+        @notify.window="
+        show = true;
+        message = $event.detail.message;
+        type = $event.detail.type;
+        setTimeout(() => show = false, 3000)
+     "
+        x-show="show" x-transition class="fixed top-4 right-4 p-4 rounded shadow-lg z-50"
+        :class="{
+            'bg-green-500': type === 'success',
+            'bg-red-500': type === 'error',
+            'bg-yellow-500': type === 'warning',
+            'bg-blue-500': type === 'info'
+        }">
+        <p x-text="message" class="text-white"></p>
+    </div>
+
+    <!-- Product Form -->
+    <form wire:submit.prevent="save" class="bg-teal p-6 rounded-2xl shadow-popout border border-white/30 space-y-4">
+
+        <!-- Name -->
+        <div>
+            <label class="block text-brand/80 mb-1 font-medium">Category Name</label>
+            <input type="text" wire:model="name" placeholder="Enter category name"
+                class="w-full bg-white/10 text-brand placeholder-brand/60 rounded-lg px-4 py-2
+                       border border-white/20 hover:border-white/40 focus:border-white/60
+                       focus:bg-white/15 hover:bg-white/15 shadow-insetpop outline-none transition-all duration-200
+                       @error('name') border-red-400 @enderror">
+            @error('name')
+                <p class="text-red-400 text-sm mt-1">{{ $message }}</p>
+            @enderror
+        </div>
+
+        <!-- Actions -->
+        <div class="flex justify-end space-x-4 pt-4 gap-2">
+            <button type="button" wire:click="$reset"
+                class="bg-white/10 text-brand border border-white/20 px-4 py-2 rounded-lg shadow-popout transition-all duration-200 ease-in-out
+       hover:-translate-y-[1px] hover:shadow-[0_4px_6px_rgba(0,0,0,0.1)]
+       active:translate-y-[1px] active:shadow-insetpop">
+                Cancel
+            </button>
+            <button type="submit"
+                class=" font-semibold px-4 py-2 rounded-lg shadow-popout hover:shadow-insetpop transition-all duration-200 ease-in-out
+                   hover:-translate-y-[1px] hover:shadow-[0_4px_6px_rgba(0,0,0,0.1)]
+                   active:translate-y-[1px] active:shadow-insetpop text-white bg-gradient-to-r from-greenStart to-greenEnd">
+                Save Category
+            </button>
+        </div>
+
+    </form>
+
+</div>

@@ -10,7 +10,7 @@ class PaymentMethod extends Model
 
     protected $guarded = [];
 
-    protected $primaryKey = 'payment_method_id';
+    protected $primaryKey = 'id';
 
     public function orders()
     {

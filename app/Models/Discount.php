@@ -10,7 +10,7 @@ class Discount extends Model
 
     protected $guarded = [];
 
-    protected $primaryKey = 'discount_id';
+    protected $primaryKey = 'id';
 
     public function orders()
     {
