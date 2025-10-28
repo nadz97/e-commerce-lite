@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Livewire\Admin\Product\Create;
+use App\Livewire\Admin\Product\CategoryCreate;
 use App\Livewire\Admin\Product\CreateCategory;
 
 Route::view('/', 'welcome');
@@ -21,8 +22,8 @@ Route::get('/admin/products', function () {
 Route::get('/admin/product/create', Create::class)
     ->name('admin.product.create');
 
-Route::get('/admin/product/create-category', CreateCategory::class)
-    ->name('admin.product.create-category');
+Route::get('/admin/product/category-create', CategoryCreate::class)
+    ->name('admin.product.category-create');
 
 Route::get('/admin/products/category', function () {
     return view('admin.categories');

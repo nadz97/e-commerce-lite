@@ -22,7 +22,6 @@ class Sidebar extends Component
                 'icon' => 'fas fa-box',
                 'children' => [
                     ['label' => 'All Products', 'route' => 'admin.products'],
-                    ['label' => 'Add New', 'route' => 'admin.product.create'],
                     ['label' => 'Categories', 'route' => 'admin.categories'],
                 ],
             ],

@@ -40,9 +40,9 @@ final class CategoriesTable extends PowerGridComponent
         return PowerGrid::fields()
             ->add('id')
             ->add('name')
-            ->add('name_lower', fn (Category $model) => strtolower(e($model->name)))
+            ->add('name_lower', fn(Category $model) => strtolower(e($model->name)))
             ->add('created_at')
-            ->add('created_at_formatted', fn (Category $model) => Carbon::parse($model->created_at)->format('d/m/Y H:i:s'));
+            ->add('created_at_formatted', fn(Category $model) => Carbon::parse($model->created_at)->format('d/m/Y H:i:s'));
     }
 
     public function columns(): array
@@ -54,7 +54,8 @@ final class CategoriesTable extends PowerGridComponent
 
             Column::make('Name', 'name')
                 ->searchable()
-                ->sortable(),
+                ->sortable()
+                ->editOnClick(),
 
             Column::make('Created at', 'created_at')
                 ->hidden(),
@@ -66,28 +67,73 @@ final class CategoriesTable extends PowerGridComponent
         ];
     }
 
-    public function filters(): array
-    {
-        return [
-            Filter::inputText('name'),
-            Filter::datepicker('created_at_formatted', 'created_at'),
-        ];
-    }
+    // public function filters(): array
+    // {
+    //     return [
+    //         Filter::inputText('name'),
+    //         Filter::datepicker('created_at_formatted', 'created_at'),
+    //     ];
+    // }
 
     #[\Livewire\Attributes\On('edit')]
     public function edit($rowId): void
     {
-        $this->js('alert('.$rowId.')');
+        $this->js('alert(' . $rowId . ')');
+    }
+
+    public function onUpdatedEditable(string|int $id, string $field, string $value): void
+    {
+        // Define validation rules for each field
+        $rules = [
+            'name' => ['required', 'string', 'max:255', 'min:3'],
+            'description' => ['nullable', 'string', 'max:1000'],
+        ];
+
+        // Get the rule for the specific field
+        $fieldRule = $rules[$field] ?? ['string', 'max:255'];
+
+        // Validate using the value directly
+        $validator = \Illuminate\Support\Facades\Validator::make(
+            [$field => $value],
+            [$field => $fieldRule]
+        );
+
+        if ($validator->fails()) {
+            $this->dispatch('showError', $validator->errors()->first($field));
+            return;
+        }
+
+        // Update with validated and escaped data
+        Category::query()->find($id)->update([
+            $field => e($value),
+        ]);
+
+        // Optional: refresh the table
+        $this->dispatch('pg:eventRefresh-default');
+    }
+
+    protected function getListeners()
+    {
+        return [
+            'delete' => 'deleteCategory',
+        ];
+    }
+
+    public function deleteCategory($rowId)
+    {
+        Category::find($rowId)->delete();
+
+        $this->dispatch('pg:eventRefresh-default');
     }
 
     public function actions(Category $row): array
     {
         return [
-            Button::add('edit')
-                ->slot('Edit: '.$row->id)
+            Button::add('delete')
+                ->slot('Delete: ' . $row->id)
                 ->id()
                 ->class('pg-btn-white dark:ring-pg-primary-600 dark:border-pg-primary-600 dark:hover:bg-pg-primary-700 dark:ring-offset-pg-primary-800 dark:text-pg-primary-300 dark:bg-pg-primary-700')
-                ->dispatch('edit', ['rowId' => $row->id])
+                ->dispatch('delete', ['rowId' => $row->id])
         ];
     }
 

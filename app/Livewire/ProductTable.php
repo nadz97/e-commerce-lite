@@ -71,13 +71,13 @@ final class ProductTable extends PowerGridComponent
         ];
     }
 
-    public function filters(): array
-    {
-        return [
-            Filter::inputText('name'),
-            Filter::datepicker('created_at_formatted', 'created_at'),
-        ];
-    }
+    // public function filters(): array
+    // {
+    //     return [
+    //         Filter::inputText('name'),
+    //         Filter::datepicker('created_at_formatted', 'created_at'),
+    //     ];
+    // }
 
     #[\Livewire\Attributes\On('edit')]
     public function edit($rowId): void
