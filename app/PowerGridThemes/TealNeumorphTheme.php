@@ -45,7 +45,7 @@ class TealNeumorphTheme extends Tailwind
     {
         return [
             'view'   => $this->root() . '.footer',
-            'select' => 'appearance-none !bg-none focus:ring-primary-600 focus-within:focus:ring-primary-600 focus-within:ring-primary-600 dark:focus-within:ring-primary-600 flex rounded-md ring-1 transition focus-within:ring-2 dark:ring-pg-primary-600 dark:text-pg-primary-300 text-gray-600 ring-gray-300 dark:bg-pg-primary-800 bg-teal dark:placeholder-pg-primary-400 rounded-md border-0 bg-transparent py-1.5 px-4 pr-7 ring-0 placeholder:text-gray-400 focus:outline-none sm:text-sm sm:leading-6 w-auto',
+            'select' => 'appearance-none !bg-none w-full bg-white/10 text-brand placeholder-brand/60 rounded-lg pl-4 pr-4 py-2 border border-white/20 hover:border-white/40 focus:border-white/60 focus:bg-white/15 hover:bg-white/15 shadow-insetpop focus:shadow-popout outline-none transition-all duration-200 sm:text-sm sm:leading-6 w-auto',
         ];
     }
 

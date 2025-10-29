@@ -30,7 +30,7 @@
                 ADD NEW +
             </a>
         </div>
-
+        <x-flash-message />
         <livewire:categories-table />
     </div>
 </x-app-layout>

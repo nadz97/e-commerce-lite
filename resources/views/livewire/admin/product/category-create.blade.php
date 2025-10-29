@@ -1,10 +1,4 @@
 <div class="space-y-6">
-    {{-- @if (session()->has('flash'))
-        <div
-            class="p-4 rounded-lg text-sm {{ session('flash.type') === 'success' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800' }}">
-            {{ session('flash.message') }}
-        </div>
-    @endif --}}
     <x-flash-message />
 
     <!-- Page Title -->
