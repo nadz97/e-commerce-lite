@@ -20,11 +20,10 @@ class CategoryCreate extends Component
         ]);
 
         $this->reset(['category']);
-        $this->dispatch(
-            'flash',
-            message: 'Category created successfully!',
-            type: 'success'
-        );
+        request()->session()->flash('flash', [
+            'message' => 'Category created successfully!',
+            'type' => 'success'
+        ]);
     }
 
     public function render()

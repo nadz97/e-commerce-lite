@@ -22,9 +22,8 @@
 
 <body class="font-sans antialiased bg-teal">
     <div class="h-screen flex flex-col">
-        <livewire:flash-message />
-        <div x-data="{}" x-on:notify.window="console.log('Event received:', $event.detail)" class="hidden">
-        </div>
+
+
         {{-- Fixed Header --}}
         @if (!request()->is('404') && !request()->is('500'))
             <header class="fixed top-0 left-0 right-0 z-40">
